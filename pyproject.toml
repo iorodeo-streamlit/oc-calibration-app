@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "oc-calibration-app"
+version = "0.1.0"
+description = ""
+authors = ["Will Dickson <will@eiorodeo.com>"]
+readme = "README.md"
+packages = [{include = "oc_calibration_app"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+streamlit = "^1.15.2"
+numpy = "^1.23.5"
+matplotlib = "^3.6.2"
+pandas = "^1.5.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
