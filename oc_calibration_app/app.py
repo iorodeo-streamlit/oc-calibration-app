@@ -59,13 +59,12 @@ if uploaded_file:
         'range'    :  {'min': abso.min(), 'max': abso.max()},
         }
 
-    cal_json = json.dumps(cal)
 
-    st.json(cal_json, expanded=True)
+    st.json(json.dumps(cal), expanded=True)
 
     st.download_button(
             label = 'Download json calibration data',
-            data = json.dumps(cal_json),
+            data = json.dumps(cal, indent=4),
             file_name = f'calibration.json', 
             mime='text/plain'
             )
