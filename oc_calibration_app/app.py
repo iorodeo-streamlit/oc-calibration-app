@@ -6,7 +6,9 @@ import matplotlib.pyplot as plt
 from collections import OrderedDict
 from data_fitting import polyfit_thru_zero
 
-st.title('Open Colorimeter Calibrator')
+st.title('oc-calibration-app')
+
+st.subheader('Generate json calibrations for the Open Colorimeter')
 
 test_name = st.text_input('Test Name',value='My Test')
 
