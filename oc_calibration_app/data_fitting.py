@@ -36,3 +36,30 @@ def coef_to_polyval(fit_coef):
     fit_coef_polyval = np.zeros(fit_coef.size+1)
     fit_coef_polyval[:-1] = fit_coef[::-1]
     return fit_coef_polyval
+
+
+def polyfit_unconstrained(x, y, order, num_pts=500):
+    """
+    Fit polynomial to data such that p(x) = y 
+
+    args:
+      x        = x-coordinates of sample points, array like shape (M,)   
+      y        = y-coordinates of sample points, array like shape (M,)  
+      order    = order of the polynomial fit, integer >= 1
+      num_pts  = number of points at which to evaluate data.
+
+    Returns:
+      coef     = fit coefficients highest order to lowest (polyval order)
+      x_fit    = x-coordinates of evaluated fit, array like (num_pts,)
+      y_fit    = y-coordinates of evaluated fit, array like (num_pts,)
+
+    """
+    x_array = np.array(x)
+    y_array = np.array(y)
+    fit_coef = np.polyfit(x_array, y_array, order)
+    x_fit = np.linspace(x_array.min(), x_array.max(), num_pts)
+    y_fit = np.polyval(fit_coef, x_fit)
+    return fit_coef, x_fit, y_fit
+
+
+

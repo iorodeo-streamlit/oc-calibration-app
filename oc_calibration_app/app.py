@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from collections import OrderedDict
 from data_fitting import polyfit_thru_zero
+from data_fitting import polyfit_unconstrained
 
 st.title('oc-calibration-app')
 
@@ -17,6 +18,8 @@ units = st.text_input('Units', value='ppm')
 led = st.number_input('LED (nm)', value = 630, min_value=0, max_value=1000, step=1, format='%d')
 
 fit_type = st.selectbox('Fit Type', ('linear', 'polynomial')) 
+
+is_constrained = st.checkbox('constrain regression to go through point (0,0)', value=True)
 
 if fit_type == 'polynomial':
     fit_order = st.number_input('Fit Order', value=2, min_value=1, max_value=10)
@@ -42,7 +45,10 @@ if uploaded_file:
 
     abso = df['absorbance']
     meas = df[units]
-    coef, abso_fit, meas_fit = polyfit_thru_zero(abso, meas, fit_order)
+    if is_constrained:
+        coef, abso_fit, meas_fit = polyfit_thru_zero(abso, meas, fit_order)
+    else:
+        coef, abso_fit, meas_fit = polyfit_unconstrained(abso, meas, fit_order)
 
     fig, ax = plt.subplots(1,1)
     ax.plot(abso_fit, meas_fit, 'r')
